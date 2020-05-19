@@ -1,0 +1,18 @@
+Package: bedlm
+Title: Linear Models for Genetic Data At Scale
+Version: 0.0.0.9000
+Authors@R: person("Daniel", "Lawson", email = "dan.lawson@bristol.ac.uk", role = c("aut", "cre"))
+Description: Tools to perform linear modelling on large genetic datasets stored in plink bim/bed/fam format. For a dataset with N individuals and L SNPs, supports a selection of memory efficient approaches including Stochastic Gradient Descent at O(N+P), Sequential updating at O(P^2), using big.menory.
+License: GPL-3
+Encoding: UTF-8
+Imports:
+	pcapred
+Remotes:
+	danjlawson/pcapred,
+	jaredhuling/bigFastlm
+Suggests:
+	bigmemory,
+	biglm,
+	bigFastlm
+LazyData: true
+RoxygenNote: 7.0.1
