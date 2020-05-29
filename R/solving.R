@@ -13,6 +13,22 @@ get_loadings <- function(X,U,D) {
   return( 1/D %*% t(U) %*% X )
 }
 
+get_predictions <- function(bed,loadings,verbose=FALSE){
+    gd=function(bed,i,y,...){
+        data=pcapred::get_data(bed,i,meanimpute=TRUE,verbose=verbose)
+        ret=as.numeric(data %*% loadings)
+        attr(ret, "idx")=attr(data, "idx")
+        ret
+    }
+    i=1
+    pred=rep(NA,bed$no.ind)
+    while(i<=ceiling(bed$no.ind/4)){
+        tmp=gd(bed,i,y,verbose=verbose)
+        pred[attr(tmp,"idx")]=tmp
+        i=i+1
+    }
+    pred
+}
 
 bedbiglm<-function(bed,y,verbose=TRUE){
     gd=function(bed,i,y,...){
