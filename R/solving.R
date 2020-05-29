@@ -13,6 +13,13 @@ get_loadings <- function(X,U,D) {
   return( 1/D %*% t(U) %*% X )
 }
 
+#' @title Get predictions from a set of loadings
+#' @description in progress
+#' @param bed
+#' @param loadings
+#' @param verbose
+#' @return A vector of length bed$no.ind containing predictions
+#' @export
 get_predictions <- function(bed,loadings,verbose=FALSE){
     gd=function(bed,i,y,...){
         data=pcapred::get_data(bed,i,meanimpute=TRUE,verbose=verbose)
@@ -30,6 +37,13 @@ get_predictions <- function(bed,loadings,verbose=FALSE){
     pred
 }
 
+#' @title Predict using biglm
+#' @description in progress
+#' @param bed
+#' @param y
+#' @param verbose
+#' @return A list
+#' @export
 bedbiglm<-function(bed,y,verbose=TRUE){
     gd=function(bed,i,y,...){
         data=pcapred::get_data(bed,i,verbose=verbose)
@@ -58,6 +72,15 @@ bedbiglm<-function(bed,y,verbose=TRUE){
          coeff=summary(mybiglm)$mat[,1])
 }
 
+#' @title Predict using bigfastlm
+#' @description in progress
+#' @param bed
+#' @param y
+#' @param tfile
+#' @param verbose
+#' @param ...
+#' @return A list
+#' @export
 bedbigfastlm<-function(bed,y,tfile=NULL,verbose=TRUE,...){
     if (!requireNamespace("bigmemory", quietly = TRUE)){
         stop("Package \"bigmemory\" needed for this function to work. Please install it with install.packages(\"bigmemory\".",
